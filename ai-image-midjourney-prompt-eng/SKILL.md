@@ -9,6 +9,9 @@ description: >
   "generate a visual of...", or reference any Midjourney-specific terminology like stylize,
   chaos, weird, niji, or prompt weighting. This skill turns vague creative intent into
   production-ready Midjourney prompts with optimal parameters.
+version: 1.0.0
+license: MIT
+author: Chad Cribbins (chad@mereshot.com)
 ---
 
 # Midjourney Prompt Agent

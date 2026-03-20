@@ -7,6 +7,9 @@ description: >
   Also trigger when users mention AI image generation for business use, DALL-E for work,
   image prompts for presentations, or generating product visuals. This skill is
   tool-agnostic — works with DALL-E, Midjourney, Ideogram, or any image generator.
+version: 1.0.0
+license: MIT
+author: Chad Cribbins (chad@mereshot.com)
 ---
 
 # AI Image Prompting

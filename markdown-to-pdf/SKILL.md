@@ -6,6 +6,9 @@ description: >
   print-ready output. Trigger when users mention md-to-pdf, PDF from markdown,
   branded PDF, or "make a PDF." Two modes: standard (just markdown) or branded
   (markdown + DTCG design tokens).
+version: 1.0.0
+license: MIT
+author: Chad Cribbins (chad@mereshot.com)
 ---
 
 # PDF Generator

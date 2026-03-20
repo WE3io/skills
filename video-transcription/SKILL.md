@@ -9,6 +9,9 @@ description: >
   "get the text from this video." Supports three approaches: local (free, private) via
   yt-dlp + Whisper, fast cloud transcription via Groq Speech-to-Text, or rich-metadata
   cloud API via AssemblyAI.
+version: 1.0.0
+license: MIT
+author: Chad Cribbins (chad@mereshot.com)
 ---
 
 # Video & Audio Transcription
