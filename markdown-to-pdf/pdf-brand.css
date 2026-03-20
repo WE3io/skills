@@ -1,0 +1,58 @@
+/* WE3 brand overrides — layers on top of md-to-pdf's default markdown.css.
+ * Only touches colors, font, and accents. Layout/spacing stays default.
+ *
+ * Background trick: Puppeteer margins set to 0 for full-bleed background.
+ * CSS padding on body simulates margins. box-decoration-break: clone
+ * repeats the padding on every page fragment. */
+
+html {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+body {
+  background: var(--sys-surface-page) !important;
+  color: var(--sys-color-on-surface);
+  font-family: var(--sys-font-family);
+  margin: 0;
+  padding: 2cm;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+h1, h2, h3, h4 {
+  color: var(--sys-color-primary);
+}
+
+hr {
+  border-top: 1pt solid var(--sys-surface-border);
+}
+
+blockquote {
+  border-left-color: var(--sys-color-secondary);
+}
+
+ul {
+  list-style: none;
+  padding-left: 1.5em;
+}
+
+ul li {
+  position: relative;
+}
+
+ul li::before {
+  content: "\2022";
+  color: var(--sys-color-primary);
+  font-weight: bold;
+  position: absolute;
+  left: -1em;
+}
+
+table th {
+  background: var(--sys-surface-card);
+}
+
+table tr:nth-child(2n) {
+  background: var(--sys-surface-card);
+}
