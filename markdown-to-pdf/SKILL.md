@@ -37,6 +37,14 @@ Branded mode also requires:
 
 Default to standard. Use branded when the user provides a token file, asks for "branded" output, or mentions design tokens.
 
+On this VPS, use the wrapper command:
+
+```bash
+md-to-pdf-safe
+```
+
+It applies the required Puppeteer `--no-sandbox` launch args automatically when running as root.
+
 ---
 
 ## Standard Mode
@@ -49,7 +57,7 @@ Clean, professional A4 output using md-to-pdf's built-in stylesheet. No custom C
 2. **Generate:**
 
 ```bash
-npx md-to-pdf <markdown-file>
+md-to-pdf-safe <markdown-file>
 ```
 
 3. **Report** the PDF path and file size.
@@ -82,7 +90,7 @@ styles/pdf-brand.css           (thin overrides using var())
     +
 markdown.css                   (md-to-pdf built-in base)
     |
-    v  md-to-pdf --config-file pdf-config.js
+    v  md-to-pdf-safe --config-file pdf-config.js
     |
 output.pdf
 ```
@@ -119,10 +127,13 @@ const { join } = require('path');
 
 module.exports = {
   stylesheet: [
-    '/opt/homebrew/lib/node_modules/md-to-pdf/markdown.css',
+    '/usr/lib/node_modules/md-to-pdf/markdown.css',
     join(__dirname, 'styles', 'tokens.generated.css'),
     join(__dirname, 'styles', 'pdf-brand.css'),
   ],
+  launch_options: {
+    args: ['--no-sandbox'],
+  },
   pdf_options: {
     format: 'A4',
     printBackground: true,
@@ -142,7 +153,7 @@ This produces `styles/tokens.generated.css`.
 6. **Generate PDF:**
 
 ```bash
-npx md-to-pdf <markdown-file> --config-file pdf-config.js
+md-to-pdf-safe <markdown-file> --config-file pdf-config.js
 ```
 
 7. **Report** the PDF path and file size.
@@ -161,11 +172,12 @@ These are verified facts. Do not guess or assume otherwise.
 
 - **No config auto-discovery.** There is no automatic loading of `.md-to-pdf.js` or any other config file. Config must be passed explicitly via `--config-file path`.
 - **`--stylesheet` REPLACES the built-in default.** It does not add to it. The config file's `stylesheet` array also replaces, not appends. To keep the built-in styles, include the path to `markdown.css` in your stylesheet array.
-- **Built-in stylesheet** lives at: `/opt/homebrew/lib/node_modules/md-to-pdf/markdown.css`
+- **Built-in stylesheet** on this VPS lives at: `/usr/lib/node_modules/md-to-pdf/markdown.css`
 - **`stylesheet` expects file paths**, not CSS content. Passing `readFileSync()` content will cause an ENAMETOOLONG error.
 - **Config file must be CommonJS** (`module.exports = { ... }`), not ESM. md-to-pdf loads it with `require()`.
 - **Frontmatter** in the markdown file can set config (pdf_options, stylesheet, etc.), but this modifies the input file — avoid it.
-- **Runs from Claude Code sandbox** — Puppeteer/headless Chrome launches fine.
+- **Running as root on this VPS requires Puppeteer launch args**: use `md-to-pdf-safe`, `--launch-options '{"args":["--no-sandbox"]}'`, or `launch_options: { args: ['--no-sandbox'] }` in config, otherwise Chromium will fail to start.
+- **Sandbox note:** `md-to-pdf` starts a local file server while rendering, so it may require execution outside the sandbox in locked-down environments.
 
 ### Full-bleed background color
 

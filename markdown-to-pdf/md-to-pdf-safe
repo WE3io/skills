@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+exec md-to-pdf "$@" --launch-options '{"args":["--no-sandbox"]}'
