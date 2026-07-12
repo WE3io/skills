@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repo Reorient"
+  short_description: "Re-check Git before stale thread work."
+  default_prompt: "Reorient this repo/thread before making changes."
